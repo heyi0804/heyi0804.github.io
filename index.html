@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+      margin: 0;
+      padding: 0;
+    }
+  
+    a {
+      text-decoration: none;
+      color: #721c24;
+    }
+  
+    h1 {
+      text-align: center;
+      color: #333;
+      margin: 20px 0;
+  
+    }
+  
+    .title {
+      width: 1200px;
+      height: 50px;
+      line-height: 50px;
+      padding-right: 15px;
+      border: 1px solid #ebebeb;
+      margin: 10px auto;
+      background-color: #f2f2f2;
+      text-align: right;
+    }
+  
+    .title span {
+      display: inline-block;
+      vertical-align: middle;
+      height: 20px;
+      margin: -3px 5px 0;
+      text-align: center;
+      line-height: 20px;
+      color: #f26934;
+      font-weight: 700;
+    }
+  
+    table {
+      margin: 0 auto;
+      width: 1200px;
+      border-collapse: collapse;
+      color: #3c3637;
+    }
+  
+    th {
+      padding: 10px;
+      background: #f2f2f2;
+      font-size: 18px;
+      text-align: left;
+    }
+  
+    td,
+    th {
+      border: 1px solid #1a1919;
+      padding: 15px;
+    }
+  
+    td {
+  
+      color: #161616;
+      font-size: 16px;
+  
+    }
+  
+    tbody tr {
+      background: #fffefe;
+    }
+  
+    tbody tr:hover {
+      background: #1cb0eb;
+    }
+  
+    tbody a {
+      display: inline-block;
+      width: 80px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      background-color: #187bfc;
+    }
+  
+    .info {
+      width: 900px;
+      margin: 50px auto;
+      text-align: center;
+    }
+  
+    .info input,
+    .info select {
+      width: 100px;
+      height: 30px;
+      outline: none;
+      border: 1px solid #ebebeb;
+      padding-left: 5px;
+      box-sizing: border-box;
+      margin-right: 10px;
+    }
+  
+    .info button {
+      width: 70px;
+      height: 30px;
+      background-color: #5dbfd8;
+      outline: none;
+      border: 0;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  
+    .info button:hover {
+      background-color: #52abc1;
+    }
+    </style>
+</head>
+<body>
+  <!-- 您的网页内容 -->
+  <h1>库房物资管理登记表</h1>
+  <form class="info" autocomplete="off">
+    <input type="text" class="tool" name="tool" placeholder="借用工具名称" />
+    <input type="text" class="num" name="num" placeholder="借用数量" />
+    <input type="text" class="uname" name="name" placeholder="借用人姓名" />
+    <input type="text" class="phone" name="phone" placeholder="借用人手机号" />
+   
+    <button class="add">
+      <i class="iconfont icon-tianjia"></i>登记
+    </button>
+  </form>
+
+  <div class="title">共有数据<span>0</span>条</div>
+  <table>
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>借用工具名称</th>
+        <th>借用数量</th>
+        <th>借用人姓名</th>
+        <th>借用人手机号</th>
+        <th>借用时间</th>
+        <th>归还时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr>
+        <td>1</td>
+        <td>锤子</td>
+        <td>何毅</td>
+        <td>13389976971</td>
+        <td>2023-07-01 08：00：00</td>
+        <td>
+          <a href="javascript:">
+            <i class="iconfont icon-shanchu"></i>
+            删除
+          </a>
+        </td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <!-- Firebase JavaScript SDK -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js";
+    import { getStorage, ref, getDownloadURL, uploadBytes, uploadString } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
+    // TODO: Add SDKs for Firebase products that you want to use 
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyBQQI4tZEqIX3yH5parPjGvKEF2eMLzBVY",
+      authDomain: "kufang-6d086.firebaseapp.com",
+      projectId: "kufang-6d086",
+      storageBucket: "kufang-6d086.appspot.com",
+      messagingSenderId: "226153282034",
+      appId: "1:226153282034:web:74c43521f37ece9b21536b",
+      measurementId: "G-PHC89XY39Z"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const storage = getStorage(app);
+    const data = []
+    
+    // 上传
+    function upload(data){
+        
+        const newData = JSON.stringify(data);
+        
+        uploadString(ref(storage, 'data.json'), newData).then((snapshot) => {
+        console.log('Uploaded !');
+        });
+        }
+
+     // 下载
+     async function download() {
+      try {
+        const url = await getDownloadURL(ref(storage, 'data.json'));
+        const response = await fetch(url);
+        const jsonString = await response.text();
+        const data = JSON.parse(jsonString);
+        return Array.isArray(data) ? data : [data];
+      } catch (error) {
+        console.error('Error in download:', error);
+        throw error;
+      }
+    }
+
+    //   我的网页js
+    // 准备的数据
+    const initData = [{
+      id: 1,
+      tool: '锤子',
+      name: '何毅',
+      phone: '13389976971',
+      time: '2023-08-01 13:48:00'
+    }]
+     
+    
+    // 渲染业务
+    async function render(){
+        
+        const arr = await download()
+        const tbody = document.querySelector('tbody')
+        const new_arr = arr.map(function(ele,index){
+        if (ele.deleted) {
+      // 如果数据被删除，添加删除线并显示删除时间
+      return `
+        <tr style="text-decoration: line-through;">
+          <td>${ele.id}</td>
+          <td>${ele.tool}</td>
+          <td>${ele.num}</td>
+          <td>${ele.name}</td>
+          <td>${ele.phone}</td>
+          <td>${ele.time}</td>
+          <td>${ele.deleteTime}</td>
+          <td>
+            <a href="javascript:" data-id="${index}">
+              <i class="iconfont icon-shanchu"></i>
+              归还
+            </a>
+          </td>
+        </tr>
+      `;
+    } else {
+      // 数据未被删除，不添加删除线
+      return `
+        <tr>
+          <td>${ele.id}</td>
+          <td>${ele.tool}</td>
+          <td>${ele.num}</td>
+          <td>${ele.name}</td>
+          <td>${ele.phone}</td>
+          <td>${ele.time}</td>
+          <td> </td>
+          <td>
+            <a href="javascript:" data-id="${index}">
+              <i class="iconfont icon-shanchu"></i>
+              归还
+            </a>
+          </td>
+        </tr>
+      `;
+    }
+      })
+      tbody.innerHTML = new_arr.join('')
+      document.querySelector('.title span').innerHTML = arr.length
+    }
+    render()
+    
+      // 新增业务
+  const info = document.querySelector('.info')
+  const tool = document.querySelector('.tool')
+  const num = document.querySelector('.num')
+  const uname = document.querySelector('.uname')
+  const phone = document.querySelector('.phone')
+
+  info.addEventListener('submit', async function(e) {
+    e.preventDefault()
+    if (!tool.value || !uname.value || !phone.value) {
+      return alert('输入内容不能为空！')
+    }
+
+    try {
+      // 获取最新的数据
+      const arr = await download()
+      // 更新数据
+      arr.push({
+        id: arr.length + 1,
+        tool: tool.value,
+        num: num.value,
+        name: uname.value,
+        phone: phone.value,
+        time: new Date().toLocaleString(),
+        deleted: false,
+        deleteTime: null
+      })
+      // 上传更新后的数据
+      await upload(arr)
+      // 重新渲染页面
+      await render()
+      this.reset()
+    } catch (error) {
+      console.error('Error handling form submission:', error)
+    }
+  })
+
+  // 归还业务
+  const tbody = document.querySelector('tbody')
+  tbody.addEventListener('click', async function(e) {
+    if (e.target.tagName === 'A') {
+      if (confirm('你确定已经归还了吗？')) {
+        let index = e.target.dataset.id
+
+        try {
+          // 获取最新的数据
+          const arr = await download()
+          // 更新数据
+          arr[index].deleted = true
+          arr[index].deleteTime = new Date().toLocaleString()
+          // 上传更新后的数据
+          await upload(arr)
+          // 重新渲染页面
+          await render()
+        } catch (error) {
+          console.error('Error handling item return:', error)
+        }
+      }
+    }
+  })
+  // 在页面加载时，先调用 render() 函数进行初始化渲染
+  render()
+  </script>
+</body>
+</html>
