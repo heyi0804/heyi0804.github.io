@@ -204,10 +204,7 @@
       <td>13389976971</td>
       <td>2023-07-01 08：00：00</td>
       <td>
-        <a href="javascript:">
-          <i class="iconfont icon-shanchu"></i>
-          删除
-        </a>
+        <button></button>
       </td>
     </tr> -->
   </tbody>
@@ -263,10 +260,10 @@
                 <td>${ele.time}</td>
                 <td>${ele.deleteTime}</td>
                 <td>
-                    <a href="javascript:" data-id="${index}">
+                    <button href="javascript:" data-id="${index}" disabled>
                     <i class="iconfont icon-shanchu"></i>
                     归还
-                    </a>
+                    </button>
                 </td>
                 </tr>
             `;
@@ -282,10 +279,10 @@
                 <td>${ele.time}</td>
                 <td> </td>
                 <td>
-                    <a href="javascript:" data-id="${index}">
+                    <button href="javascript:" data-id="${index}">
                     <i class="iconfont icon-shanchu"></i>
                     归还
-                    </a>
+                    </button>
                 </td>
                 </tr>
             `;
@@ -380,10 +377,9 @@
   // 归还业务
   const tbody = document.querySelector('tbody')
   tbody.addEventListener('click',  function(e) {
-    if (e.target.tagName === 'A') {
+    if (e.target.tagName === 'BUTTON') {
       if (confirm('你确定已经归还了吗？')) {
         let index = e.target.dataset.id
-
         
         get(child(db, `kufang`)).then((snapshot) => {
             if (snapshot.exists()) {
@@ -396,6 +392,7 @@
            upload(arr)
           // 重新渲染页面
            download()
+           
             }
             })
         }
