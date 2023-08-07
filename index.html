@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>电气一次库房管理系统</title>
-    <style>
-        * {
-      margin: 0;
-      padding: 0;
-    }
-    /* 样式用于遮罩 */
-    .overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.8); /* 遮罩层的半透明黑色 */
-          z-index: 9999; /* 遮罩层显示在最上层 */
-          display: flex;
-          align-items: center;
-          justify-content: center;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电气一次库房管理系统</title>
+  <style>
+      * {
+        margin: 0;
+        padding: 0;
+        
+      }
+      /* 样式用于遮罩 */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       /* 样式用于欢迎内容 */
       .welcome-content {
-          background-color: #fffcfc;
-          padding: 20px;
-          border-radius: 10px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-          max-width: 400px;
+        background-color: #fffcfc;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        max-width: 400px;
       }
-      .welcome-content p,button{
+      .welcome-content p,.welcome-content button{
         display: block;
         margin: 40px auto;
         font-size: 20px;
-
       }
       .welcome-content button{
         width: 200px;
@@ -47,175 +47,170 @@
         cursor: pointer;
         box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
       }
-    a {
-      text-decoration: none;
-      color: #721c24;
-    }
-  
-    h1 {
-      text-align: center;
-      color: #333;
-      margin: 20px 0;
-  
-    }
-  
-    .title {
-      width: 1200px;
-      height: 50px;
-      line-height: 50px;
-      padding-right: 15px;
-      border: 1px solid #ebebeb;
-      margin: 10px auto;
-      background-color: #f2f2f2;
-      text-align: right;
-    }
-  
-    .title span {
-      display: inline-block;
-      vertical-align: middle;
-      height: 20px;
-      margin: -3px 5px 0;
-      text-align: center;
-      line-height: 20px;
-      color: #f26934;
-      font-weight: 700;
-    }
-  
-    table {
-      margin: 0 auto;
-      width: 1200px;
-      border-collapse: collapse;
-      color: #3c3637;
-    }
-  
-    th {
-      padding: 10px;
-      background: #f2f2f2;
-      font-size: 18px;
-      text-align: left;
-    }
-  
-    td,
-    th {
-      border: 1px solid #1a1919;
-      padding: 15px;
-    }
-  
-    td {
-  
-      color: #161616;
-      font-size: 16px;
-  
-    }
-  
-    tbody tr {
-      background: #fffefe;
-    }
-  
-    tbody tr:hover {
-      background: #1cb0eb;
-    }
-  
-    tbody a {
-      display: inline-block;
-      width: 80px;
-      height: 30px;
-      text-align: center;
-      line-height: 30px;
-      color: #fff;
-      background-color: #187bfc;
-    }
-  
-    .info {
-      width: 900px;
-      margin: 50px auto;
-      text-align: center;
-    }
-  
-    .info input,
-    .info select {
-      width: 100px;
-      height: 30px;
-      outline: none;
-      border: 1px solid #ebebeb;
-      padding-left: 5px;
-      box-sizing: border-box;
-      margin-right: 10px;
-    }
-  
-    .info button {
-      width: 70px;
-      height: 30px;
-      background-color: #5dbfd8;
-      outline: none;
-      border: 0;
-      color: #fff;
-      cursor: pointer;
-      font-size: 14px;
-    }
-  
-    .info button:hover {
-      background-color: #52abc1;
-    }
-    </style>
+      a {
+        text-decoration: none;
+        color: #721c24;
+      }
+    
+      h1 {
+        text-align: center;
+        color: #333;
+        margin: 1.2rem auto;
+      }
+    
+      .title {
+        width: 100%;
+        height: 1rem;
+        line-height: 1rem;
+        
+        border: 1px solid #ebebeb;
+        margin: 1rem auto;
+        background-color: #f2f2f2;
+        text-align: right;
+      }
+    
+      .title span {
+        display: inline-block;
+        vertical-align: middle;
+        height: 1rem;
+        margin: -10px 5px 0px;
+        text-align: center;
+        line-height: 20px;
+        color: #f26934;
+        font-weight: 700;
+      }
+    
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #3c3637;
+      }
+    
+      th {
+        border: 1px solid #161616;
+        background: #f2f2f2;
+        font-size: 1rem;
+        text-align: center;
+        padding: 5px;
+      }
+    
+      td {
+        border: 1px solid #1a1919;
+        text-align: center;
+        padding: 5px;
+        color: #161616;
+        font-size: 1rem;
+      }
+    
+      tbody tr {
+        background: #fffefe;
+      }
+    
+      tbody tr:hover {
+        background: #1cb0eb;
+      }
+    
+      tbody a {
+        display:block;
+        margin: 0.4rem;
+        text-align: center;
+        color: #fff;
+        background-color: #5dbfd8;
+      }
+    
+      .info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        
+        text-align: center;
+      }
+    
+      .info input,
+      .info select {
+        width: 4rem;
+        max-width: 200px;
+        height: 2rem;
+        outline: none;
+        border: 1px solid #ebebeb;
+        padding-left: 5px;
+        box-sizing: border-box;
+        margin-right: 10px;
+      }
+    
+      .info button {
+        
+        width: 4rem;
+        height: 2rem;
+        
+        background-color: #5dbfd8;
+        outline: none;
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+        
+      }
+    
+      .info button:hover {
+        background-color: #52abc1;
+      }
+  </style>
 </head>
 <body>
-  <!-- 遮罩层，用于遮挡其他内容 -->
-  <div class="overlay" id="welcomeOverlay">
-    <!-- 欢迎内容 -->
-    <div class="welcome-content">
-        <h1>欢迎来到电气一次的库房管理系统！</h1>
-        <!-- 添加其他欢迎内容 -->
-        <p>&nbsp&nbsp&nbsp&nbsp请注意保护数据，不要随意删除他人填写的内容，也不要填写无意义的数据！</p>
-        <button onclick="hideWelcome()">进入系统！</button>
-    </div>
+<!-- 遮罩层，用于遮挡其他内容 -->
+<div class="overlay" id="welcomeOverlay">
+  <!-- 欢迎内容 -->
+  <div class="welcome-content">
+      <h1>欢迎来到电气一次的库房管理系统！</h1>
+      <!-- 添加其他欢迎内容 -->
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;请注意保护数据，不要随意删除他人填写的内容，也不要填写无意义的数据！</p>
+      <button onclick="hideWelcome()">进入系统！</button>
+  </div>
 </div>
 
+<!-- 您的网页内容 -->
+<h1>库房物资管理登记表</h1>
+<form class="info" autocomplete="off">
+  <input type="text" class="tool" name="tool" placeholder="借用工具名称" />
+  <input type="text" class="num" name="num" placeholder="借用数量" />
+  <input type="text" class="uname" name="name" placeholder="借用人姓名" />
+  <input type="text" class="phone" name="phone" placeholder="借用人手机号" />
+  <button class="add">
+    <i class="iconfont icon-tianjia"></i>登记
+  </button>
+</form>
 
-
-  <!-- 您的网页内容 -->
-  <h1>库房物资管理登记表</h1>
-  <form class="info" autocomplete="off">
-    <input type="text" class="tool" name="tool" placeholder="借用工具名称" />
-    <input type="text" class="num" name="num" placeholder="借用数量" />
-    <input type="text" class="uname" name="name" placeholder="借用人姓名" />
-    <input type="text" class="phone" name="phone" placeholder="借用人手机号" />
-   
-    <button class="add">
-      <i class="iconfont icon-tianjia"></i>登记
-    </button>
-  </form>
-
-  <div class="title">共有数据<span>0</span>条</div>
-  <table>
-    <thead>
-      <tr>
-        <th>序号</th>
-        <th>借用工具名称</th>
-        <th>借用数量</th>
-        <th>借用人姓名</th>
-        <th>借用人手机号</th>
-        <th>借用时间</th>
-        <th>归还时间</th>
-        <th>操作</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- <tr>
-        <td>1</td>
-        <td>锤子</td>
-        <td>何毅</td>
-        <td>13389976971</td>
-        <td>2023-07-01 08：00：00</td>
-        <td>
-          <a href="javascript:">
-            <i class="iconfont icon-shanchu"></i>
-            删除
-          </a>
-        </td>
-      </tr> -->
-    </tbody>
-  </table>
+<div class="title">共有数据<span>0</span>条</div>
+<table>
+  <thead>
+    <tr>
+      <th>序号</th>
+      <th>借用工具名称</th>
+      <th>借用数量</th>
+      <th>借用人姓名</th>
+      <th>借用人手机号</th>
+      <th>借用时间</th>
+      <th>归还时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr>
+      <td>1</td>
+      <td>锤子</td>
+      <td>何毅</td>
+      <td>13389976971</td>
+      <td>2023-07-01 08：00：00</td>
+      <td>
+        <a href="javascript:">
+          <i class="iconfont icon-shanchu"></i>
+          删除
+        </a>
+      </td>
+    </tr> -->
+  </tbody>
+</table>
   <script>
     // JavaScript代码，用于隐藏欢迎页面
     function hideWelcome() {
